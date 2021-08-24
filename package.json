@@ -1,0 +1,8 @@
+{
+    "scripts": {
+        "start": "python main.py"
+    },
+    "dependencies": {
+        "@fortawesome/fontawesome-free": "^5.15.4"
+    }
+}

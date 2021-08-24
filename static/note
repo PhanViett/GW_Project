@@ -1,0 +1,56 @@
+# # Enter your database connection details below
+# app.config['MYSQL_HOST'] = '127.0.0.1'
+# app.config['MYSQL_USER'] = 'root'
+# app.config['MYSQL_PASSWORD'] = '123456789Ht'
+# app.config['MYSQL_DB'] = 'hpa-database'
+#
+# # Intialize MySQL
+# mysql = MySQL(app)
+
+
+
+
+
+
+
+
+# name = request.form['name']
+# dob = request.form['dob']
+# gender = request.form['gender']
+# height = request.form['height']
+# weight = request.form['weight']
+# ap_hi = request.form['ap_hi']
+# ap_lo = request.form['ap_lo']
+# chol = request.form['chol']
+# gluc = request.form['gluc']
+# smoke = request.form['smoke']
+# alco = request.form['alco']
+# active = request.form['active']
+#
+# user_i4_update = dict(name=name, dob=dob, gender=gender, height=height,
+#                       weight=weight, ap_hi=ap_hi, ap_lo=ap_lo, chol=chol,
+#                       gluc=gluc, smoke=smoke, alco=alco, active=active)
+
+
+        # # Password Validation
+        # if not re.search("^[a-zA-Z0-9\s]*$", password):
+        #     flash("Password should only contain alphanumeric characters","warning")
+        #     # return redirect(request.url)
+        # else:
+        #     if not re.search("^.{4,}$", password):
+        #         flash("Password should has at least 4 characters","warning")
+        #         # return redirect(request.url)
+        #     else:    
+        #         if not re.search("^.{1,50}$", password):
+        #             flash("Password should not has over 50 characters","warning")
+        #             return redirect(request.url)
+
+        # email_pattern = "[a-zA-Z0-9]+@[a-zA-Z]+\.(com|edu|net)"
+
+
+        # if not re.match(email_pattern, email):
+        #     flash("Invalid Email","warning")
+        #     return redirect(request.url)
+
+
+

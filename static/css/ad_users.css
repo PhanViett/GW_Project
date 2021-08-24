@@ -1,0 +1,217 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+
+/* General and custom */
+* {
+    overflow-x: hidden;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.y-hidden {
+    overflow-y: hidden;
+}
+
+.v-container {
+    min-height: 100vh;
+}
+
+ul .navi {
+    margin-left: 3vw;
+    font-size: 0.9rem;
+    font-weight: bold;
+}
+
+/* Login / Welcome Button */
+.dropdown button {
+    margin-right: clamp(10px, 2vw, 30px);
+    color: black;
+}
+
+.dropdown button:hover{
+    color: black;
+    text-decoration: none;
+}
+
+.dropdown button:focus{
+    box-shadow: none;
+    text-decoration: none;
+}
+/* Logout Section */
+.dropdown-menu {
+    height: 2.5vw;
+    line-height: normal;
+}
+
+.dropdown-menu a {
+    font-size: 1rem;
+}
+
+/* Body */
+.headtitle {
+    font-size: 1.5rem;
+    margin-left: 4vw;
+}
+
+
+/* Footer */
+footer {
+    margin-top: 5vh;
+    color: #ffffff;
+    background-color: #000000;
+} 
+
+h4 {
+    line-height: normal;
+}
+
+
+/* Custom CSS */
+.d-flex{
+    padding-top: 1vh;
+    padding-bottom: 1vh;
+}
+
+/* Login / Welcome Section */
+ul {
+    height: 5vw;
+    min-height: 45px;
+    padding-left: 1vw;
+    padding-top: 0.5vw;
+    padding-bottom: 0.5vw;
+    display: inline;
+    vertical-align: middle;
+
+}
+
+li {
+    font-size: 1rem;
+    justify-content: center;
+    display: inline-block;
+    min-height: calc(45px - 1vw);
+    vertical-align: middle;
+    line-height: 5vw;
+    cursor: pointer;
+}
+
+li img {
+    width: 3vw;
+    min-width: 30px;
+}
+
+li p, dropdown button {
+    height: 4vw;
+    margin-top: 3vw;
+    font-size: 0.6rem !important;
+}
+
+table {
+    margin-right: auto;
+    margin-left: auto;
+    border-radius: 0.5rem !important;
+
+    border-collapse:separate;
+    border:solid black 1px;
+    border-radius:6px;
+    -moz-border-radius:6px;
+}
+
+.table th {
+    border-top: 0px
+    /* border-left:solid black 1px;
+    border-top:solid black 1px; */
+}
+
+.modal-title {
+    font-size: 1.5rem !important;
+}
+
+.hid_input input {
+    display: none;
+}
+
+
+
+
+
+
+@media screen and (max-width: 768px) {
+    ul .navi {
+        margin-left: 2vw;
+        font-size: .5rem;
+        font-weight: bold;
+    }
+
+    li {
+        line-height: 10vw;
+    }
+
+    li, .dropdown button {
+        font-size: 0.6rem !important;
+    }
+
+    button p {
+        font-size: 0.5rem;
+    }
+
+    .headtitle {
+        font-size: 0.8rem;
+        margin-left: 2vw;
+    }
+
+    th, td, button svg {
+        font-size: 0.5rem !important;
+    }
+
+    .action_td {
+        padding: 0 !important;
+    }
+
+    td button {
+        padding: 0 !important;
+    }
+
+    footer div {
+        margin-left: auto !important;
+        margin-right: auto !important;
+        text-align: justify !important;
+    }
+
+    footer h4 {
+        font-size: 0.6rem;
+        font-weight: bold;
+    }
+
+    footer p {
+        font-size: 0.6rem;
+    }
+    
+    #viewModal h4 {
+        font-size: .6rem;
+    }
+
+    #viewModal label, #viewModal input, #viewModal button {
+        font-size: .5rem;        
+    }
+
+    .modal-title {
+        font-size: .8rem !important;
+    }
+
+    .modal-body{
+        padding-top: 0;
+    }
+
+    .modal label, .modal input, .custom-select, .modal button {
+        font-size: .5rem;
+        margin-bottom: 0;
+    }
+
+    .form-group {
+        margin-bottom: 0;
+    }
+
+    .btns {
+        margin-top: .5rem;
+    }
+
+
+}

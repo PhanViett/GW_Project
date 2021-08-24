@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>User Profile</title>
+        <link rel="stylesheet" href="../static/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <link rel="shortcut icon" href="{{url_for('static', filename='/images/teacher.png')}}">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/js/all.js" integrity="sha256-2JRzNxMJiS0aHOJjG+liqsEOuBb6++9cY4dSOyiijX4=" crossorigin="anonymous"></script>
+
+        <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='/css/ad_users.css') }}">
+    </head>
+
+    <body>
+        <div class="v-container">
+            <!-- Top Nav-bar -->
+            <div class="container border-bottom mb-4 px-0" style="min-width: 100vw; margin: 0;">
+                <!-- Navbar -->
+                <ul style="margin: 0;">
+                    <li>
+                        <a href="index">
+                            <img class="col-form-label" src="../static/images/weblogo-noname.png">
+                        </a>
+                    </li>
+                    <li class="navi"><a class="text-dark" href="{{ url_for('index') }}">Home</a></li>
+                    <li class="navi"><a class="text-dark" href="{{ url_for('manageusers') }}">Manage Users</a></li>
+                    <li class="navi"><a class="text-dark" href="{{ url_for('index') }}">Manage News</a></li>
+                    {% if user_i4 != null %}
+                    <li class="float-right" style="display: inline-block">
+                        <div class="dropdown" style="overflow-x: visible !important; overflow-y: visible !important">
+                            <button class="btn btn-link dropdown-toggle" type="button" data-toggle="dropdown"
+                                    aria-haspopup="true" aria-expanded="false">
+                                    {{user_i4['name']}}
+                            </button>
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item text-center" href="{{ url_for('logout') }}">Logout</a>
+                            </div>
+                        </div>
+                    </li>
+                    {% elif user_i4 == null %}
+                    <li class="font-weight-bold float-right" style="margin-right: 4vw !important;">
+                    <a href="{{ url_for('login') }}" style="text-decoration: none; color: black;">Login</a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </div>
+            <p class="headtitle font-weight-bold my-3"> Manage Users </p>
+            <div class="row">
+                {% if datas != null %}
+                <table class="table col-11 col-sm-11 col-md-11 col-lg-11 col-xl-11">
+                    <thead>
+                        <tr class="text-center">
+                            <th style="width: 6% !important;">No.</th>
+                            <th style="width: 24% !important;">Name</th>
+                            <th style="width: 15% !important;">Date of Birth</th>
+                            <th style="width: 10% !important;">Gender</th>
+                            <th style="width: 30% !important;">Email</th>
+                            <th style="width: 15% !important;">Actions</th>
+                        </tr>
+                    </thead>
+                        {% for data in datas %}
+                        <tbody>                                
+                            <tr>
+                                <td>{{data.count}}</td>
+                                <td class="text-left text-primary">{{data.name}}</td>
+                                <td>{{data.dob}}</td>
+                                {% if data.gender == 1 %}
+                                <td> Male </td>
+                                {% elif data.gender == 2 %}
+                                <td> Female </td>
+                                {% endif %}
+                                <td class="text-left">{{data.email}}</td>
+                                <td class="action_td">
+                                    <button class="btn btn-link" title="View" data-toggle="modal" data-target="#viewModal{{data.count}}">
+                                        <i class="fas fa-eye text-dark"></i>
+                                    </button>
+                                    <button class="btn btn-link" title="Edit" data-toggle="modal" data-target="#editModal{{data.count}}">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button class="btn btn-link" title="Delete" data-toggle="modal" data-target="#deleteModal{{data.count}}">
+                                        <i class="fas fa-trash-alt text-danger"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+
+
+                        <!--View Modal-->
+                        <div id="viewModal{{data.count}}" class="modal fade" role="dialog">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h4 class="modal-title">Please Insert Data Here</h4>
+                                    </div>
+
+                                    <div class="modal-body">
+                                        <form action="{{url_for('profile')}}" method="POST">
+                                            <!-- Name -->
+                                            <div class="form-group">
+                                                <label>Name:</label>
+                                                <input type="text" class="form-control" name="name" value="{{data.name}}" disabled>
+                                            </div>
+                                            <!-- Role -->
+                                            <div class="form-group">
+                                                <label>Role:</label>
+                                                <input type="text" class="form-control" name="role" value="{{data.role}}" disabled>
+                                            </div>
+                                            <!-- Date of Birth -->
+                                            <div class="form-group">
+                                                <label>Date of Birth:</label>
+                                                <input type="text" class="form-control" name="dob" value="{{data.dob}}" disabled>
+                                            </div>
+                                            <!-- Email -->
+                                            <div class="form-group">
+                                                <label>Email:</label>
+                                                <input type="text" class="form-control" name="email" value="{{data.email}}" disabled>
+                                            </div>
+                                            <!-- Gender -->
+                                            <div class="form-group">
+                                                <label>Gender:</label>
+                                                {% if data.gender == 1 %}
+                                                <input type="text" class="form-control" name="gender" value="Male" disabled>                                                
+                                                {% elif data.gender == 2 %}
+                                                <input type="text" class="form-control" name="gender" value="Female" disabled>
+                                                {% endif %}
+                                            </div>
+                                            <!-- Height -->
+                                            <div class="form-group">
+                                                <label>Height (cm):</label>
+                                                <input type="text" class="form-control" name="height" value="{{data.height}}" disabled>
+                                            </div>
+                                            <!-- Weight -->
+                                            <div class="form-group">
+                                                <label>Weight (kg):</label>
+                                                <input type="text" class="form-control" name="height" value="{{data.weight}}" disabled>
+                                            </div>
+                                            <!-- Cholesterol -->
+                                            <div class="form-group">
+                                                <label>Cholesterol:</label>
+                                                {% if data.chol == 1 %}
+                                                <input type="text" class="form-control" name="cholesterol" value="Normal" disabled>
+                                                {% elif data.chol == 2 %}
+                                                <input type="text" class="form-control" name="cholesterol" value="Above normal" disabled>
+                                                {% else %}
+                                                <input type="text" class="form-control" name="cholesterol" value="Well above normal" disabled>
+                                                {% endif %}
+                                            </div>
+                                            <!-- Glucose -->
+                                            <div class="form-group">
+                                                <label>Glucose:</label>
+                                                {% if data.gluc == 1 %}
+                                                <input type="text" class="form-control" name="glucose" value="Normal" disabled>
+                                                {% elif data.gluc == 2 %}
+                                                <input type="text" class="form-control" name="glucose" value="Above normal" disabled>
+                                                {% else %}
+                                                <input type="text" class="form-control" name="glucose" value="Well above normal" disabled>
+                                                {% endif %}
+                                            </div>
+                                            <!-- Alcohol -->
+                                            <div class="form-group">
+                                                <label>Alcohol:</label>
+                                                {% if data.alco == 0 %}
+                                                <input type="text" class="form-control" name="alcohol" value="Yes" disabled>
+                                                {% elif data.alco == 1 %}
+                                                <input type="text" class="form-control" name="alcohol" value="No" disabled>
+                                                {% endif %}
+                                            </div>
+                                            <!-- Smoke -->
+                                            <div class="form-group">
+                                                <label>Smoke:</label>
+                                                {% if data.smoke == 0 %}
+                                                <input type="text" class="form-control" name="smoke" value="Yes" disabled>
+                                                {% elif data.smoke == 1 %}
+                                                <input type="text" class="form-control" name="smoke" value="No" disabled>
+                                                {% endif %}
+                                            </div>
+                                            <!-- Active -->
+                                            <div class="form-group">
+                                                <label>Active:</label>
+                                                {% if data.active == 0 %}
+                                                <input type="text" class="form-control" name="active" value="Yes" disabled>
+                                                {% elif data.active == 1 %}
+                                                <input type="text" class="form-control" name="active" value="No" disabled>
+                                                {% endif %}
+                                            </div>
+                                            <div class="btns form-group float-right">
+                                                <button class="btn btn-primary" type="submit"> Import Data </button>
+                                                <button class="btn btn-secondary" data-dismiss="modal"> Close </button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Edit Modal -->
+                        <div id="editModal{{data.count}}" class="modal fade" role="dialog">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h4 class="modal-title">Please Insert Data Here</h4>
+                                    </div>
+
+                                    <div class="modal-body">
+                                        <form action="{{url_for('adminupdate')}}" method="POST">
+                                            <!-- Count -->
+                                            <input type="text" class="form-control" name="count" value="{{data.count}}" hidden>
+                                            <!-- Name -->
+                                            <div class="form-group">
+                                                <label>Name:</label>
+                                                <input type="text" class="form-control" name="name" value="{{data.name}}">
+                                            </div>
+                                            <!-- Role -->
+                                            <div class="form-group">
+                                                <label>Role:</label>
+                                                <select class="custom-select" id="role" name="role">
+                                                {% if data.role == ['user'] %}
+                                                    <option value="['user']" selected>User</option>
+                                                    <option value="admin">Admin</option>
+                                                {% elif data.role == ['admin'] %}
+                                                    <option value="user">User</option>
+                                                    <option value="admin" selected>Admin</option>
+                                                {% endif %}
+                                                </select>
+                                            </div>
+                                            <!-- Date of Birth -->
+                                            <div class="form-group">
+                                                <label>Date of Birth:</label>
+                                                <input type="text" class="form-control" name="dob" value="{{data.dob}}">
+                                            </div>
+                                            <!-- Email -->
+                                            <div class="form-group">
+                                                <label>Email:</label>
+                                                <input type="text" class="form-control" name="email" value="{{data.email}}">
+                                            </div>
+                                            <!-- Gender -->
+                                            <div class="form-group">
+                                                <label>Gender:</label>
+                                                <select class="custom-select" id="gender" name="gender">
+                                                    {% if data.gender == 1 %}
+                                                        <option value="1" selected>Male</option>
+                                                        <option value="2">Female</option>                                                
+                                                    {% elif data.gender == 2 %}
+                                                        <option value="1">Male</option>
+                                                        <option value="2" selected>Female</option>                                                
+                                                    {% endif %}
+                                                </select>
+                                            </div>
+                                            <!-- Height -->
+                                            <div class="form-group">
+                                                <label>Height (cm):</label>
+                                                <input type="text" class="form-control" name="height" value="{{data.height}}">
+                                            </div>
+                                            <!-- Weight -->
+                                            <div class="form-group">
+                                                <label>Weight (kg):</label>
+                                                <input type="text" class="form-control" name="weight" value="{{data.weight}}">
+                                            </div>
+                                            <!-- Cholesterol -->
+                                            <div class="form-group hid_input">
+                                                <label>Cholesterol:</label>
+                                                <select class="custom-select" id="chol" name="chol">
+                                                    {% if data.chol == 1 %}
+                                                        <option value="1" selected>Normal</option>
+                                                        <option value="2">Above normal</option>
+                                                        <option value="3">Well above normal</option>
+                                                    {% elif data.chol == 2 %}
+                                                        <option value="1">Normal</option>
+                                                        <option value="2" selected>Above normal</option>
+                                                        <option value="3">Well above normal</option>
+                                                    {% elif data.chol == 3 %}
+                                                        <option value="1">Normal</option>
+                                                        <option value="2">Above normal</option>
+                                                        <option value="3" selected>Well above normal</option>
+                                                    {% endif %}
+                                                </select>
+                                            </div>
+
+                                            <!-- Glucose -->
+                                            <div class="form-group">
+                                                <label>Glucose:</label>
+                                                <select class="custom-select" id="gluc" name="gluc">
+                                                    {% if data.gluc == 1 %}
+                                                        <option value="1" selected>Normal</option>
+                                                        <option value="2">Above normal</option>
+                                                        <option value="3">Well above normal</option>
+                                                    {% elif data.gluc == 2 %}
+                                                        <option value="1">Normal</option>
+                                                        <option value="2" selected>Above normal</option>
+                                                        <option value="3">Well above normal</option>
+                                                    {% elif data.chol == 3 %}
+                                                        <option value="1">Normal</option>
+                                                        <option value="2">Above normal</option>
+                                                        <option value="3" selected>Well above normal</option>
+                                                    {% endif %}
+                                                </select>
+                                            </div>
+                                            <!-- Alcohol -->
+                                            <div class="form-group">
+                                                <label>Alcohol:</label>
+                                                <select class="custom-select" id="alco" name="alco">
+                                                    {% if data.alco == 0 %}
+                                                        <option value="0" selected>Yes</option>
+                                                        <option value="1">No</option>
+                                                    {% elif data.alco == 1 %}
+                                                        <option value="0">Yes</option>
+                                                        <option value="1" selected>No</option>
+                                                    {% endif %}
+                                                </select>
+                                            </div>
+                                            <!-- Smoke -->
+                                            <div class="form-group">
+                                                <label>Smoke:</label>
+                                                <select class="custom-select" id="smoke" name="smoke">
+                                                    {% if data.smoke == 0 %}
+                                                        <option value="0" selected>Yes</option>
+                                                        <option value="1">No</option>
+                                                    {% elif data.smoke == 1 %}
+                                                        <option value="0">Yes</option>
+                                                        <option value="1" selected>No</option>
+                                                    {% endif %}
+                                                </select>
+                                            </div>
+                                            <!-- Active -->
+                                            <div class="form-group">
+                                                <label>Active:</label>
+                                                <select class="custom-select" id="active" name="active">
+                                                    {% if data.active == 0 %}
+                                                        <option value="0" selected>Yes</option>
+                                                        <option value="1">No</option>
+                                                    {% elif data.active == 1 %}
+                                                        <option value="0">Yes</option>
+                                                        <option value="1" selected>No</option>
+                                                    {% endif %}
+                                                </select>
+                                            </div>
+                                            <div class="btns form-group float-right">
+                                                <button class="btn btn-primary" type="submit"> Import Data </button>
+                                                <button class="btn btn-secondary" data-dismiss="modal"> Close </button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Delete Modal -->
+                        <div id="deleteModal{{data.count}}" class="modal fade" role="dialog" style="top: 30%;">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-body">
+                                        <form action="{{url_for('delete')}}" method="POST">
+                                            <!-- Count -->
+                                            <input type="text" class="form-control" name="count" value="{{data.count}}" hidden>
+                                            
+                                            <p class="modal-title font-weight-bold text-primary text-center">DO YOU WANT TO DELETE <a class="text-danger">{{data.name}}</a> ?</p>
+                                            <p class="text-center text-danger">Warning: Data removed cannot recovery</p>
+
+                                            <div class="row text-center">
+                                                <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 text-center">
+                                                    <button class="btn btn-primary mr-1" type="submit">Confirm</button>
+                                                    <button class="btn btn-dark" data-dismiss="modal">Cancel</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        {% endfor %}
+                </table>
+                {% elif datas == null %}
+                <p class="text-center">Không có dữ liệu !!!</p>
+                {% endif %}
+            </div>
+                
+
+            </div>
+        </div>  
+    </body>
+    <footer>
+        <div class="row justify-content-center my-4">
+            <div class="col-4 col-sm-4 col-md-3 col-lg-3 col-xl-3">
+                <h4>About</h4>
+                <p>We provide users with a diagnostic system for potentially dangerous cardiovascular events.
+                    The system works on the user's information in the profile that the user has updated on the website.</p>
+                <p class="mb-1">@Copyright Application 2021.</p>
+                <p class="mb-1">All Right Reserved.</p>
+            </div>
+            <div class="col-4 col-sm-4 col-md-3 col-lg-3 col-xl-3">
+                <h4>Contacts</h4>
+                <p class="mb-1">Phan Van Viet</p>
+                <p class="mb-1">Tel: 03833343354</p>
+                <p class="mb-1">Email: vietpvgcs18614@fpt.edu.vn</p>
+            </div>
+            <div class="col-4 col-sm-4 col-md-3 col-lg-3 col-xl-3">
+                <h4>Recently Posts</h4>
+            </div>
+        </div>
+    </footer>
+
+</html>

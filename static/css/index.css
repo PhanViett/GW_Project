@@ -1,0 +1,224 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+
+/* General and custom */
+* {
+    overflow-x: hidden;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.y-hidden {
+    overflow-y: hidden;
+}
+
+.v-container {
+    min-height: 100vh;
+}
+/* Login / Welcome Button */
+.dropdown button {
+    margin-right: clamp(10px, 2vw, 30px);
+    color: black;
+}
+
+.dropdown button:hover{
+    color: black;
+    text-decoration: none;
+}
+
+.dropdown button:focus{
+    box-shadow: none;
+    text-decoration: none;
+}
+/* Logout Section */
+.dropdown-menu {
+    height: 2.5vw;
+    line-height: normal;
+}
+
+.dropdown-menu a {
+    font-size: 1rem;
+}
+
+/* Footer */
+footer {
+    margin-top: 5vh;
+    color: #ffffff;
+    background-color: #000000;
+}
+
+
+/* Custom CSS */
+.d-flex{
+    padding-top: 1vh;
+    padding-bottom: 1vh;
+}
+
+/* Login / Welcome Section */
+ul {
+    height: 5vw;
+    min-height: 45px;
+    padding-left: 1vw;
+    padding-top: 0.5vw;
+    padding-bottom: 0.5vw;
+    display: inline;
+    vertical-align: middle;
+
+}
+
+li {
+    font-size: 1rem;
+    justify-content: center;
+    display: inline-block;
+    min-height: calc(45px - 1vw);
+    vertical-align: middle;
+    line-height: 5vw;
+    cursor: pointer;
+}
+
+li img {
+    width: 3vw;
+    min-width: 30px;
+}
+
+li p, dropdown button {
+    height: 4vw;
+    margin-top: 3vw;
+    font-size: 0.6rem !important;
+}
+
+/* Carousel (Slider) */
+.carousel-indicators {
+    margin: 0;
+}
+
+.carousel-indicators li {
+    min-height: 0 !important;
+}
+
+.carousel-item img {
+    width: 100vw !important;
+    height: auto;
+    margin: 0;
+}
+
+.carousel-control-prev, .carousel-control-next {
+    min-width: 10px;
+    width: 4vw;
+}
+
+
+/* Functions Menu */
+.menu {
+    margin-top: 0.5vw;
+    margin-bottom: 0.5vw;
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.menu p {
+    padding-left: 2px;
+    padding-right: 2px;
+}
+
+div .option {
+    padding: 0;
+}
+
+
+button img {
+    width: 3vw;
+    min-width: 20px;
+}
+
+button p {
+    font-size: .9rem;
+    margin-bottom: 0;
+}
+
+/* Daily Tips */
+.custom-row p {
+    width: fit-content;
+    font-size:calc(12px + 1.5vw);
+    margin-left: clamp(40px, 6vw, 80px);
+    font-weight: 600;
+    line-height: normal ;
+    border-bottom: 1px 1px #000000;
+}
+
+.tips-row div img {
+    width: 18vw;
+}
+
+.tips-row div a {
+    font-size: 1.3rem;
+    font-weight: 500;
+    text-decoration: none;
+    color:#000000;
+}
+
+.tips-row div a:hover {
+    color: #4584f7;
+}
+
+
+h4 {
+    line-height: normal ;
+}
+
+@media screen and (max-width: 768px) {
+    li {
+        line-height: 10vw;
+    }
+
+    li, .dropdown button {
+        font-size: 0.6rem !important;
+    }
+
+    button p {
+        font-size: 0.5rem;
+    }
+
+    footer div {
+        margin-left: auto !important;
+        margin-right: auto !important;
+        text-align: justify !important;
+    }
+
+    footer h4 {
+        font-size: 0.8rem;
+        font-weight: bold;
+    }
+
+    footer p {
+        font-size: 0.6rem;
+    }
+
+
+    .tips-row div img {
+        width: 30vw;
+        padding-left: 15px;
+    }
+    
+    .tips-row div a {
+        font-size: .8rem;
+        font-weight: 700;
+        text-decoration: none;
+        color:#000000;
+    }
+        
+    .tips-row div a:hover {
+        color: #4584f7;
+    }
+
+    .tips-row div p {
+        font-size: .5rem;
+        font-weight: 700;
+    }
+    
+
+}
+
+
+
+
+
+

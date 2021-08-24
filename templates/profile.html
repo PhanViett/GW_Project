@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>User Profile</title>
+        <link rel="stylesheet" href="../static/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <link rel="shortcut icon" href="{{url_for('static', filename='/images/teacher.png')}}">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/js/all.js" integrity="sha256-2JRzNxMJiS0aHOJjG+liqsEOuBb6++9cY4dSOyiijX4=" crossorigin="anonymous"></script>
+        <!-- Normal CSS -->
+        <link rel= "stylesheet" type= "text/css" href= "../static/css/profile.css">
+        <!-- Python CSS -->
+        <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='/css/profile.css') }}">
+    </head>
+
+    <body>
+        <div class="v-container">
+            <!-- Top Nav-bar -->
+            <div class="container border-bottom mb-4 px-0" style="min-width: 100vw; margin: 0;">
+                <!-- Navbar -->
+                <ul style="margin: 0;">
+                    <li>
+                        <a href="index">
+                            <img class="col-form-label" src="../static/images/weblogo-noname.png">
+                        </a>
+                    </li>
+                    <li class="navi"><a class="text-dark" href="{{ url_for('index') }}">Home</a></li>
+                    <li class="navi"><a class="text-dark" href="{{ url_for('records') }}">Records</a></li>
+                    <li class="navi"><a class="text-dark" href="{{ url_for('records') }}">News</a></li>
+                    {% if user_i4 != null %}
+                    <li class="float-right" style="display: inline-block">
+                        <div class="dropdown" style="overflow-x: visible !important; overflow-y: visible !important">
+                            <button class="btn btn-link dropdown-toggle" type="button" data-toggle="dropdown"
+                                    aria-haspopup="true" aria-expanded="false">
+                                    {{user_i4['name']}}
+                            </button>
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item text-center" href="{{ url_for('logout') }}">Logout</a>
+                            </div>
+                        </div>
+                    </li>
+                    {% elif user_i4 == null %}
+                    <li class="font-weight-bold float-right" style="margin-right: 4vw !important;">
+                    <a href="{{ url_for('login') }}" style="text-decoration: none; color: black;">Login</a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </div>
+
+            <!-- Page Main Row -->
+            <div class="row justify-content-center">
+                <!-- Avatar Column in a Row -->
+                <div class="col-lg-4">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-8 text-center avatar px-0">
+                                <img src="../static/images/avatar.jpg">
+                        </div>
+                        <div class="col-lg-8 mt-4 text-center">
+                            <button class="btn btn-primary avatarbtn mb-4"> Change avatar </button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Form Column in a Row -->
+                <div class="col-lg-7">
+                    <!-- Page Title -->
+                    <h2 class="font-weight-bold mb-4" style="overflow: hidden">User Profile</h2>
+                    <form action = "{{url_for('update')}}" method ="POST">
+                        <!-- Name Row -->
+                        <div class="row profile mb-3">
+                            <div class="col-2 col-sm-2 col-md-2 col-lg-2 col-xl-2">
+                                <label class="col-form-label font-weight-bold">Name</label>
+                            </div>
+                            <div class="col-9 col-sm-9 col-md-9 col-lg-9 col-xl-9">
+                                <input class="form-control" id="name" name="name" value="{{user_i4['name']}}" placeholder="Name">
+                            </div>
+                            <div class="validation">
+                                {% with messages = get_flashed_messages(with_categories=true, category_filter=["name"]) %}
+                                    {% if messages %}
+                                        {% for category, message in messages %}
+                                        <div class="alert fade show my-0 py-0 pr-0" role="alert">
+                                            <i class="fas fa-exclamation mr-2"></i>
+                                            <span class="my-0">{{message}}</span>
+                                        </div>
+                                        {% endfor %}
+                                    {% endif %}
+                                {% endwith %}
+                            </div>
+                        </div>
+                        <!-- DoB Row -->
+                        <div class="row profile mb-3">
+                            <div class="col-2 col-sm-2 col-md-2 col-lg-2 col-xl-2">
+                                <label class="col-form-label font-weight-bold">DoB</label>
+                            </div>
+                            <div class="col-9 col-sm-9 col-md-9 col-lg-9 col-xl-9">
+                                <input class="form-control" id="dob" name="dob" type="date" value="{{user_i4['dob']}}" placeholder="Date of Birth">
+                            </div>
+                        </div>
+                        <!-- Gender Row -->
+                        <div class="row profile mb-3">
+                            <div class="col-2 col-sm-2 col-md-2 col-lg-2 col-xl-2">
+                                <label class="col-form-label font-weight-bold">Gender</label>
+                            </div>
+                            <div class="col-9 col-sm-9 col-md-9 col-lg-9 col-xl-9">
+                                <select class="custom-select" id="gender" name="gender">
+                                {% if user_i4 != null %}
+                                    {% if user_i4['gender'] == 1 %}
+                                    <option value="1" selected>Male</option>
+                                    <option value="2">Female</option>
+                                    {% elif user_i4['gender'] == 2 %}
+                                    <option value="1">Male</option>
+                                    <option value="2" selected>Female</option>
+                                    {% endif %}
+                                {% elif user_i4 == null %}
+                                    <option value="" disabled selected hidden>Choose gender</option>
+                                    <option value="1">Male</option>
+                                    <option value="2">Female</option>
+                                {% endif %}
+                                 </select>
+                            </div>
+                        </div>
+                        <!-- Height Row -->
+                        <div class="row profile mb-3">
+                            <div class="col-2 col-sm-2 col-md-2 col-lg-2 col-xl-2">
+                                <label class="col-form-label font-weight-bold">Height</label>
+                            </div>
+                            <div class="col-9 col-sm-9 col-md-9 col-lg-9 col-xl-9">
+                                <input class="form-control" id="height" name="height" value="{{user_i4['height']}}" placeholder="Height (cm)">
+                            </div>
+                            <div class="validation">
+                                {% with messages = get_flashed_messages(with_categories=true, category_filter=["height"]) %}
+                                    {% if messages %}
+                                        {% for category, message in messages %}
+                                        <div class="alert fade show my-0 py-0 pr-0" role="alert">
+                                            <i class="fas fa-exclamation mr-2"></i>
+                                            <span class="my-0">{{message}}</span>
+                                        </div>
+                                        {% endfor %}
+                                    {% endif %}
+                                {% endwith %}
+                            </div>
+                        </div>
+                        <!-- Weight Row -->
+                        <div class="row profile mb-3">
+                            <div class="col-2 col-sm-2 col-md-2 col-lg-2 col-xl-2">
+                                <label class="col-form-label font-weight-bold">Weight</label>
+                            </div>
+                            <div class="col-9 col-sm-9 col-md-9 col-lg-9 col-xl-9">
+                                <input class="form-control" id="weight" name="weight" value="{{user_i4['weight']}}" placeholder="Weight (kg)">
+                            </div>
+                            <div class="validation">
+                                {% with messages = get_flashed_messages(with_categories=true, category_filter=["weight"]) %}
+                                    {% if messages %}
+                                        {% for category, message in messages %}
+                                        <div class="alert fade show my-0 py-0 pr-0" role="alert">
+                                            <i class="fas fa-exclamation mr-2"></i>
+                                            <span class="my-0">{{message}}</span>
+                                        </div>
+                                        {% endfor %}
+                                    {% endif %}
+                                {% endwith %}
+                            </div>
+                        </div>
+                        <!-- Cholesterol Row -->
+                        <div class="row profile mb-3">
+                            <div class="col-2 col-sm-2 col-md-2 col-lg-2 col-xl-2">
+                                <label class="col-form-label font-weight-bold">Cholesterol</label>
+                            </div>
+                            <div class="col-9 col-sm-9 col-md-9 col-lg-9 col-xl-9">
+                                <select class="custom-select" id="chol" name="chol">
+                                    {% if user_i4 != null %}
+                                        {% if user_i4['chol'] == 1 %}
+                                        <option value="1" selected>Normal</option>
+                                        <option value="2">Level 2</option>
+                                        <option value="3">Level 3</option>
+                                        {% elif user_i4['chol'] == 2 %}
+                                        <option value="1">Normal</option>
+                                        <option value="2" selected>Level 2</option>
+                                        <option value="3">Level 3</option>
+                                        {% elif user_i4['chol'] == 3 %}
+                                        <option value="1">Normal</option>
+                                        <option value="2">Level 2</option>
+                                        <option value="3" selected>Level 3</option>
+                                        {% endif %}
+                                    {% elif user_i4 == null %}
+                                    <option value="" disabled selected hidden>Choose level</option>-->
+                                    <option value="1">Normal</option>
+                                    <option value="2">Level 2</option>
+                                    <option value="3">Level 3</option>
+                                    {% endif %}
+                                </select>
+                            </div>
+                        </div>
+                        <!-- Glucose Row -->
+                        <div class="row profile mb-3">
+                            <div class="col-2 col-sm-2 col-md-2 col-lg-2 col-xl-2">
+                                <label class="col-form-label font-weight-bold">Glucose</label>
+                            </div>
+                            <div class="col-9 col-sm-9 col-md-9 col-lg-9 col-xl-9">
+                                <select class="custom-select" id="gluc" name="gluc">
+                                    {% if user_i4 != null %}
+                                        {% if user_i4['gluc'] == 1 %}
+                                        <option value="1" selected>Normal</option>
+                                        <option value="2">Level 2</option>
+                                        <option value="3">Level 3</option>
+                                        {% elif user_i4['gluc'] == 2 %}
+                                        <option value="1">Normal</option>
+                                        <option value="2" selected>Level 2</option>
+                                        <option value="3">Level 3</option>
+                                        {% elif user_i4['gluc'] == 3 %}
+                                        <option value="1">Normal</option>
+                                        <option value="2">Level 2</option>
+                                        <option value="3" selected>Level 3</option>
+                                        {% endif %}
+                                    {% elif user_i4 == null %}
+                                    <option value="" disabled selected hidden>Choose level</option>
+                                    <option value="1">Normal</option>
+                                    <option value="2">Level 2</option>
+                                    <option value="3">Level 3</option>
+                                    {% endif %}
+                                </select>
+                            </div>
+                        </div>
+                        <!-- Alcohol Row -->
+                        <div class="row profile mb-3">
+                            <div class="col-2 col-sm-2 col-md-2 col-lg-2 col-xl-2">
+                                <label class="col-form-label font-weight-bold">Alcohol</label>
+                            </div>
+                            <div class="col-9 col-sm-9 col-md-9 col-lg-9 col-xl-9">
+                                <select class="custom-select" id="alco" name="alco">
+                                    {% if user_i4 != null %}
+                                        {% if user_i4['alco'] == 0 %}
+                                        <option value="0" selected>Yes</option>
+                                        <option value="1">No</option>
+                                        {% elif user_i4['alco'] == 1 %}
+                                        <option value="0">Yes</option>
+                                        <option value="1" selected>No</option>
+                                        {% endif %}
+                                    {% elif user_i4 == null %}
+                                    <option value="" disabled selected hidden>Choose status</option>
+                                    <option value="0">Yes</option>
+                                    <option value="1">No</option>
+                                    {% endif %}
+                                </select>
+                            </div>
+                        </div>
+                        <!-- Smoke Row -->
+                        <div class="row profile mb-3">
+                            <div class="col-2 col-sm-2 col-md-2 col-lg-2 col-xl-2">
+                                <label class="col-form-label font-weight-bold">Smoke</label>
+                            </div>
+                            <div class="col-9 col-sm-9 col-md-9 col-lg-9 col-xl-9">
+                                <select class="custom-select" id="smoke" name="smoke">
+                                    {% if user_i4 != null %}
+                                        {% if user_i4['smoke'] == 0 %}
+                                        <option value="0" selected>Yes</option>
+                                        <option value="1">No</option>
+                                        {% elif user_i4['smoke'] == 1 %}
+                                        <option value="0">Yes</option>
+                                        <option value="1" selected>No</option>
+                                        {% endif %}
+                                    {% elif user_i4 == null %}
+                                    <option value="" disabled selected hidden>Choose status</option>
+                                    <option value="0">Yes</option>
+                                    <option value="1">No</option>
+                                    {% endif %}
+                                </select>
+                            </div>
+                        </div>
+                        <!-- Active Row -->
+                        <div class="row profile mb-3">
+                            <div class="col-2 col-sm-2 col-md-2 col-lg-2 col-xl-2">
+                                <label class="col-form-label font-weight-bold">Active</label>
+                            </div>
+                            <div class="col-9 col-sm-9 col-md-9 col-lg-9 col-xl-9">
+                                <select class="custom-select" id="active" name="active">
+                                    {% if user_i4 != null %}
+                                        {% if user_i4['active'] == 0 %}
+                                        <option value="0" selected>Yes</option>
+                                        <option value="1">No</option>
+                                        {% elif user_i4['active'] == 1 %}
+                                        <option value="0">Yes</option>
+                                        <option value="1" selected>No</option>
+                                        {% endif %}
+                                    {% elif user_i4 == null %}
+                                    <option value="" disabled selected hidden>Choose status</option>
+                                    <option value="0">Yes</option>
+                                    <option value="1">No</option>
+                                    {% endif %}
+                                </select>
+                            </div>
+                        </div>
+                        <!-- Buttons -->
+                        <div  class="row">
+                            <div class="col-7 col-sm-7 col-md-7 col-lg-9 col-xl-9">
+                                <a style="color: white">Space</a>
+                            </div>
+                            <div class="col-5 col-sm-5 col-md-5 col-lg-3 col-xl-3 ">
+                                <button class="btn btn-primary custombtnwidth mr-4" type="submit"> Confirm </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </body>
+    <footer>
+        <div class="row justify-content-center my-4">
+            <div class="col-4 col-sm-4 col-md-3 col-lg-3 col-xl-3">
+                <h4>About</h4>
+                <p>We provide users with a diagnostic system for potentially dangerous cardiovascular events.
+                    The system works on the user's information in the profile that the user has updated on the website.</p>
+                <p class="mb-1">@Copyright Application 2021.</p>
+                <p class="mb-1">All Right Reserved.</p>
+            </div>
+            <div class="col-4 col-sm-4 col-md-3 col-lg-3 col-xl-3">
+                <h4>Contacts</h4>
+                <p class="mb-1">Phan Van Viet</p>
+                <p class="mb-1">Tel: 03833343354</p>
+                <p class="mb-1">Email: vietpvgcs18614@fpt.edu.vn</p>
+            </div>
+            <div class="col-4 col-sm-4 col-md-3 col-lg-3 col-xl-3">
+                <h4>Recently Posts</h4>
+            </div>
+        </div>
+    </footer>
+
+    <!-- <script>
+        function myFunction() {
+          document.getElementById("i4Form").reset();
+        }
+    </script> -->
+
+</html>
+
+
+
+
