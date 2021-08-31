@@ -13,6 +13,11 @@
     margin-right: auto;
 }
 
+.margin-y {
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
 /* Ul, Li CSS */
 ul {
     padding: 0;
@@ -63,36 +68,37 @@ li div a {
 /* End Ul, Li */
 
 
-.avatar {
-    height: 20vw !important;
-    min-height: 100px;
-    width: 15vw !important;
-    min-width: 75px;
+
+
+
+.headline {
+    font-size: 2rem;
+}
+
+.news .row {
     border-radius: 5px;
-    margin-top: 5vw;
-    background-image: url(avatar.jpg);
+    padding: 1rem;
 }
 
-.avatar img {
-    height: 20vw;
-    min-height: 100px;
-    width: 15vw;
-    min-width: 75px;
+.news .row div a {
+    color: black;
+    font-size: 1.4rem;
+}
+
+.news img {
+    width: 12vw;
+    height: 9vw;
     border-radius: 5px;
 }
 
-.profile {
-    width: 58vw;
+.author p {
+    color: #bababb;
+    font-size: .8rem;
 }
 
 
 
 
-
-
-.profile button {
-    margin-right: 1.5rem;
-}
 
 
 
@@ -122,76 +128,15 @@ h4 {
 
 
 
-
-
-
-
-
-
-.fileupload {
-    position: relative;
-}
-
-.fileupload input {
-    position: absolute;
-    right: 0;
-    cursor: pointer;
-    opacity: 0.0;
-}
-
-
-
-
-
-
-
-
 @media screen and (max-width: 768px) {
     
     .v-container {
-        min-height: 875px;
+        min-height: 600px;
     }
-
-    .v-container .body {
-        width: 100vw;
-    }
-
-    .avatar {
-        width: 35vw !important;
-        height: 45vw !important;
-    }
-
-    .avatar img {
-        width: 35vw !important;
-        height: 45vw !important;
-    }
-
-    .profile {
-        width: 100%;
-        padding: 0;
-        margin: 0;
-    }
-
-
-    .profile button {
-        margin-right: 0 !important;
-    }
-
-
-
-    h2 {
-        display: none;
-    }
-
-
-
-
 
     li a {
         margin-left: 10px;
     }
-
-
 
     .dropdown-user {
         padding-top: calc(.375rem);
@@ -200,6 +145,81 @@ h4 {
         font-size: inherit;
         line-height: 1.5;
     }
+
+
+
+
+
+
+    .headline {
+        font-size: 1rem;
+    }
+
+
+
+    .title {
+        line-height: 1 !important;
+    }
+
+
+
+
+    .news .row {
+        border-radius: 6px;
+        padding: .2rem;
+    }
+
+
+
+    .news .row div a {
+        color: black;
+        font-size: .8rem;
+    }
+
+
+
+
+
+
+    .author p {
+        color: #bababb;
+        font-size: .5rem;
+    }
+    
+    
+
+
+    .news img {
+        width: 16vw;
+        height: 16vw;
+        border-radius: 5px;
+    }
+
+
+
+
+
+    .title {
+        margin-top: 3px;
+        margin-left: 3px;
+        margin-bottom: 5px;
+    }
+
+    .author {
+        margin-left: 3px;
+    }
+
+
+
+    .box .box-left {
+        padding: 0;
+    }
+
+
+    /* .box-right {
+        margin-top: 3px;
+        margin-right: 3px;
+    } */
 
         
     footer div {

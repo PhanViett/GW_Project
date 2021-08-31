@@ -3,7 +3,7 @@
 /* General and custom */
 * {
     overflow-x: hidden;
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'Arial', sans-serif;
 }
 
 .y-hidden {
@@ -11,8 +11,14 @@
 }
 
 .v-container {
-    min-height: 100vh;
+    min-height: 65vh;
 }
+
+.container {
+    min-height: 70vh;
+    margin: 0 !important
+}
+
 /* Login / Welcome Button */
 .dropdown button {
     margin-right: clamp(10px, 2vw, 30px);
@@ -41,8 +47,8 @@
 /* Records List */
 .records {
     padding: .7rem !important;
-    margin-left: auto;
-    margin-right: auto;
+    /* margin-left: auto;
+    margin-right: auto; */
     border: 1px solid;
     border-radius: 0.5rem !important;
     box-shadow: 1px 1px 10px 1px #88888888;
@@ -106,7 +112,7 @@ li p, dropdown button {
     }
 
     button p {
-        font-size: 0.5rem;
+        font-size: 0.6rem;
     }
 
     footer div {
@@ -124,6 +130,46 @@ li p, dropdown button {
         font-size: 0.6rem;
     }
 
+
+    .record-section div span {
+        font-size: .6rem;
+    }
+    
+
+
+    ul .navi {
+        margin-left: 2vw
+    }
+
 }
 
 
+
+
+
+
+
+.g-status {
+    background-color: #dffaf1;
+    border-radius: 25px;
+}
+
+.b-status {
+    background-color: #Fcd1d1;
+    border-radius: 25px;
+}
+
+.record-section {
+    border-radius: 10px;
+    margin: 1.5rem 1rem 1.5rem 1rem;
+    box-shadow: 1px 2px 15px #888888;
+}
+
+ul .navi {
+    margin-left: 3vw
+}
+
+.navi a {
+    font-weight: 600;
+    font-family: 'Open Sans', sans-serif;
+}

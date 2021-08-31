@@ -3,6 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <title>Register</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
         <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
         <link rel="stylesheet" href="../static/bootstrap.min.css">
@@ -11,40 +12,68 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
         <link rel="shortcut icon" href="{{url_for('static', filename='/images/teacher.png')}}">
     </head>
-    <body>
-        <div class="row justify-content-end mx-0 px-0">
-            <div class="register col-4 col-sm-4 col-md-4 col-lg-4 col-xl-4 px-0">
+    <body class="d-flex justify-content-center">
+            <div class="register px-0">
                 <h1>Register</h1>
                 <div class="links">
                     <a href="{{ url_for('login') }}">Login</a>
                     <a href="{{ url_for('register') }}" class="active">Register</a>
                 </div>
+
                 <form action="{{ url_for('register') }}" method="post" autocomplete="off">
                     <!--Name Label and Input-->
-                    <label for="name">
-                        <i class="fas fa-user"></i>
-                    </label>
-                    <input type="text" name="name" placeholder="Name" id="name" required>
+                    <div class="d-flex justify-content-center">
+                        <label for="name">
+                            <i class="fas fa-user"></i>
+                        </label>
+                        <input type="text" name="name" placeholder="Name" id="name" required>
+                    </div>
+                    <div class="err_msg">
+                        {% for x in err_name %}
+                        <p>{{x}}</p>
+                        {% endfor %}
+                    </div>
+
                     <!--Username Label and Input-->
-                    <label for="username">
-                        <i class="fas fa-user"></i>
-                    </label>
-                    <input type="text" name="username" placeholder="Username" id="username" required>
+                    <div class="d-flex justify-content-center">
+                        <label for="username">
+                            <i class="fas fa-user"></i>
+                        </label>
+                        <input type="text" name="username" placeholder="Username" id="username" required>
+                    </div>
+                    <div class="err_msg">
+                        {% for y in err_username %}
+                        <p>{{y}}</p>
+                        {% endfor %}
+                    </div>
+
                     <!--Password Label and Input-->
-                    <label for="password">
-                        <i class="fas fa-lock"></i>
-                    </label>
-                    <input type="password" name="password" placeholder="Password" id="password" required>
+                    <div class="d-flex justify-content-center">
+                        <label for="password">
+                            <i class="fas fa-lock"></i>
+                        </label>
+                        <input type="password" name="password" placeholder="Password" id="password" required>
+                    </div>
+                    <div class="err_msg">
+                        {% for z in err_password %}
+                        <p>{{z}}</p>
+                        {% endfor %}
+                    </div>
+
                     <!--Password Label and Input-->
-                    <label for="email">
-                        <i class="fas fa-lock"></i>
-                    </label>
-                    <input type="email" name="email" placeholder="Email" id="email" required>
+                    <div class="d-flex justify-content-center">
+                        <label for="email">
+                            <i class="fas fa-lock"></i>
+                        </label>
+                        <input type="email" name="email" placeholder="Email" id="email" required>
+                    </div>
+
     
                     <input type="submit" value="Register">
                 </form>
+
             </div>
-            <div class="col-4 col-sm-4 col-md-4 col-lg-4 col-xl-4">
+            <!-- <div class="col-4 col-sm-4 col-md-4 col-lg-4 col-xl-4">
                 {% with messages = get_flashed_messages(with_categories=true) %}
                     {% if messages %}
                         {% for category, message in messages %}
@@ -57,10 +86,23 @@
                         </div>
                         {% endfor %}
                     {% endif %}
-                {% endwith %}
-            </div>
-        </div>
-        
+                {% endwith %} -->
+                <!-- {% if err_msg %}
+                    <div class="alert alert-warning alert-dismissible fade show mt-3" role="alert">
+                        <div class="mb-2">
+                            <a class="font-weight-bold" style="color: #856404">Warning</a>
+                        </div>
+                    
+                        {% for x in err_msg %}
+                        <p class="mb-1">{{x}}</p>
+                        {% endfor %}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                {% endif %}
+            </div> -->
+       
         
     </body>
 </html>

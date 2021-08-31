@@ -2,12 +2,7 @@
 
 /* General and custom */
 * {
-    overflow-x: hidden;
     font-family: 'Open Sans', sans-serif;
-}
-
-.y-hidden {
-    overflow-y: hidden;
 }
 
 .v-container {
@@ -22,7 +17,7 @@ ul .navi {
 
 /* Login / Welcome Button */
 .dropdown button {
-    margin-right: clamp(10px, 2vw, 30px);
+    /* margin-right: clamp(10px, 2vw, 30px); */
     color: black;
 }
 
@@ -127,10 +122,6 @@ table {
 .hid_input input {
     display: none;
 }
-
-
-
-
 
 
 @media screen and (max-width: 768px) {

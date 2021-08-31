@@ -1,77 +1,33 @@
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
-
-/* General and custom */
 * {
-    overflow-x: hidden;
-    font-family: 'Open Sans', sans-serif;
-}
-
-.y-hidden {
-    overflow-y: hidden;
+    font-family: 'Arial', sans-serif;
 }
 
 .v-container {
-    min-height: 100vh;
-}
-/* Login / Welcome Button */
-.dropdown button {
-    margin-right: clamp(10px, 2vw, 30px);
-    color: black;
+    height: 70vh;
 }
 
-.dropdown button:hover{
-    color: black;
-    text-decoration: none;
+.margin-x {
+    margin-left: auto;
+    margin-right: auto;
 }
 
-.dropdown button:focus{
-    box-shadow: none;
-    text-decoration: none;
-}
-/* Logout Section */
-.dropdown-menu {
-    height: 2.5vw;
-    line-height: normal;
-}
-
-.dropdown-menu a {
-    font-size: 1rem;
-}
-
-/* Footer */
-footer {
-    margin-top: 5vh;
-    color: #ffffff;
-    background-color: #000000;
+.row {
+    width: 99vw !important;
 }
 
 
-/* Custom CSS */
-.d-flex{
-    padding-top: 1vh;
-    padding-bottom: 1vh;
-}
-
-/* Login / Welcome Section */
+/* Ul, Li CSS */
 ul {
-    height: 5vw;
-    min-height: 45px;
-    padding-left: 1vw;
-    padding-top: 0.5vw;
-    padding-bottom: 0.5vw;
-    display: inline;
-    vertical-align: middle;
-
+    padding: 0;
+    display: block;
+    margin-top: auto;
+    margin-bottom: auto;
 }
 
 li {
-    font-size: 1rem;
-    justify-content: center;
     display: inline-block;
-    min-height: calc(45px - 1vw);
     vertical-align: middle;
-    line-height: 5vw;
-    cursor: pointer;
+    line-height: 4vw;
 }
 
 li img {
@@ -79,13 +35,43 @@ li img {
     min-width: 30px;
 }
 
-li p, dropdown button {
-    height: 4vw;
-    margin-top: 3vw;
-    font-size: 0.6rem !important;
+li div a {
+    color: black !important;
+    text-decoration: none;
+} 
+
+
+/* Dropdown CSS */
+.dropdown-toggle::after {   
+    color: black;
 }
 
-/* Carousel (Slider) */
+.dropdown-menu {
+    left: -12px !important
+}
+
+.dropdown-item {
+    line-height: 1;
+}
+
+.btn.focus, .btn:focus {
+    box-shadow:  0 0 0 0 #fff;
+}
+/* End Dropdown */
+
+
+/* End Ul, Li */
+
+
+/* Casouline CSS */
+
+#carousel {
+    width: 95vw;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 2vw;
+}
+
 .carousel-indicators {
     margin: 0;
 }
@@ -95,7 +81,8 @@ li p, dropdown button {
 }
 
 .carousel-item img {
-    width: 100vw !important;
+    border-radius: 6px;
+    width: 95vw;
     height: auto;
     margin: 0;
 }
@@ -105,8 +92,10 @@ li p, dropdown button {
     width: 4vw;
 }
 
+/* End Casouline */
 
-/* Functions Menu */
+
+/* Navigation Row CSS */
 .menu {
     margin-top: 0.5vw;
     margin-bottom: 0.5vw;
@@ -119,10 +108,6 @@ li p, dropdown button {
     padding-right: 2px;
 }
 
-div .option {
-    padding: 0;
-}
-
 
 button img {
     width: 3vw;
@@ -133,24 +118,44 @@ button p {
     font-size: .9rem;
     margin-bottom: 0;
 }
+/* End Navigation Row */
 
-/* Daily Tips */
+
+
+
 .custom-row p {
     width: fit-content;
-    font-size:calc(12px + 1.5vw);
-    margin-left: clamp(40px, 6vw, 80px);
+    font-size: 1.4rem;
+    margin-left: clamp(0px, 13vw, 320px);
     font-weight: 600;
-    line-height: normal ;
-    border-bottom: 1px 1px #000000;
+    line-height: 1 ;
+}
+
+.tips-row {
+    margin-top: 1%;
+}
+
+.tips-row div {
+    padding: 0;
 }
 
 .tips-row div img {
-    width: 18vw;
+    width: 15vw;
+    margin-bottom: 4%;
+    border-radius: 6px;
+}
+
+.contents {
+    margin-left: 3%;
+}
+
+.contents p {
+    font-size: .8rem;
 }
 
 .tips-row div a {
-    font-size: 1.3rem;
-    font-weight: 500;
+    font-size: 1.1rem;
+    font-weight: bold;
     text-decoration: none;
     color:#000000;
 }
@@ -159,10 +164,35 @@ button p {
     color: #4584f7;
 }
 
+.tips-row div p {
+    width: fit-content;
+    display: inline-block;
+    margin-top: 10px;
+}
+
+
+
+
+
+
+
+/* Footer CSS */
+footer {
+    margin-top: 5vh;
+    color: #ffffff;
+    background-color: #000000;
+}
 
 h4 {
     line-height: normal ;
 }
+
+/* End Footer */
+
+
+
+
+
 
 @media screen and (max-width: 768px) {
     li {
@@ -172,11 +202,58 @@ h4 {
     li, .dropdown button {
         font-size: 0.6rem !important;
     }
-
-    button p {
-        font-size: 0.5rem;
+    
+    .dropdown-menu {
+        width: fit-content;
     }
 
+    .dropdown-menu a {
+        font-size: 0.6rem;
+    }
+
+    button p {
+        font-size: 0.6rem;
+    }
+
+    .custom-row p {
+        width: fit-content;
+        font-size: .9rem;
+        margin-bottom: 5px;
+        margin-left: clamp(25px, 5vw, 320px);
+        font-weight: 600;
+        line-height: normal ;
+    }
+
+    .tips-row {
+        margin-top: 1%;
+    }
+
+    .tips-row div img {
+        width: 30vw;
+        padding-left: 15px;
+        margin-bottom: 5%;
+    }
+    
+    .tips-row div a {
+        font-size: .6rem;
+        font-weight: 700;
+        text-decoration: none;
+        color:#000000;
+    }
+
+    .tips-row div a:hover {
+        color: #4584f7;
+    }
+
+    .tips-row div p {
+        font-size: .5rem;
+        font-weight: 700;
+    }
+
+    .title a, .author a {
+        line-height: 10px;
+    }
+    
     footer div {
         margin-left: auto !important;
         margin-right: auto !important;
@@ -191,34 +268,4 @@ h4 {
     footer p {
         font-size: 0.6rem;
     }
-
-
-    .tips-row div img {
-        width: 30vw;
-        padding-left: 15px;
-    }
-    
-    .tips-row div a {
-        font-size: .8rem;
-        font-weight: 700;
-        text-decoration: none;
-        color:#000000;
-    }
-        
-    .tips-row div a:hover {
-        color: #4584f7;
-    }
-
-    .tips-row div p {
-        font-size: .5rem;
-        font-weight: 700;
-    }
-    
-
 }
-
-
-
-
-
-

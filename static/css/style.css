@@ -8,13 +8,15 @@
 body {
   	background-color: #435165;
   	margin: 0;
+
 }
 .login, .register {
 	z-index: 2 !important;
-  	width: 400px;
+  	width: 30vw;
   	background-color: #ffffff;
   	box-shadow: 0 0 9px 0 rgba(0, 0, 0, 0.3);
-  	margin-top: 8vw;
+  	margin-top: 20vh;
+
 }
 .login h1, .register h1 {
   	text-align: center;
@@ -57,7 +59,7 @@ body {
   	color: #ffffff;
 }
 .login form input[type="password"], .login form input[type="text"], .login form input[type="email"], .register form input[type="password"], .register form input[type="text"], .register form input[type="email"] {
-  	width: 28vw;
+  	width: 24vw;
   	height: 50px;
   	border: 1px solid #dee0e4;
   	margin-bottom: 20px;
@@ -145,4 +147,54 @@ body.loggedin {
 .content > div p {
 	padding: 5px;
 	margin: 0 0 10px 0;
+}
+
+
+
+@media screen and (max-width: 768px) {
+
+	.login, .register {
+		width: 80vw;
+		margin-top: 15vh;	
+	}
+
+	h1 {
+		font-size: 1.2rem !important;
+	}
+
+	.links a {
+		font-size: .6rem;
+	}
+
+
+
+
+	.login form input[type="password"], .login form input[type="text"], .login form input[type="email"], .register form input[type="password"], .register form input[type="text"], .register form input[type="email"] {
+		width: 60vw;
+	}
+
+	.login form label, .register form label {
+		height: 30px;
+		width: 30px;
+	}
+
+
+	.login form input[type="password"], .login form input[type="text"], .login form input[type="email"], .register form input[type="password"], .register form input[type="text"], .register form input[type="email"] {
+		height: 30px;
+		font-size: .6rem;
+		border-radius: 2px;
+		margin-bottom: 0;
+	}
+
+	.login form input[type="submit"], .register form input[type="submit"] {
+		font-size: .6rem;
+		border-radius: 2px;
+		margin-bottom: 0;
+	}
+
+
+	.err_msg p {
+		font-size: .5rem;
+	}
+
 }

@@ -10,88 +10,79 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
         <link rel="shortcut icon" href="{{url_for('static', filename='/images/teacher.png')}}">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/js/all.js" integrity="sha256-2JRzNxMJiS0aHOJjG+liqsEOuBb6++9cY4dSOyiijX4=" crossorigin="anonymous"></script>
-        <!-- Normal CSS -->
-        <link rel= "stylesheet" type= "text/css" href= "../static/css/profile.css">
         <!-- Python CSS -->
         <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='/css/profile.css') }}">
     </head>
 
     <body>
-        <div class="v-container">
-            <!-- Top Nav-bar -->
-            <div class="container border-bottom mb-4 px-0" style="min-width: 100vw; margin: 0;">
-                <!-- Navbar -->
-                <ul style="margin: 0;">
-                    <li>
-                        <a href="index">
-                            <img class="col-form-label" src="../static/images/weblogo-noname.png">
-                        </a>
-                    </li>
-                    <li class="navi"><a class="text-dark" href="{{ url_for('index') }}">Home</a></li>
-                    <li class="navi"><a class="text-dark" href="{{ url_for('records') }}">Records</a></li>
-                    <li class="navi"><a class="text-dark" href="{{ url_for('records') }}">News</a></li>
-                    {% if user_i4 != null %}
-                    <li class="float-right" style="display: inline-block">
-                        <div class="dropdown" style="overflow-x: visible !important; overflow-y: visible !important">
-                            <button class="btn btn-link dropdown-toggle" type="button" data-toggle="dropdown"
-                                    aria-haspopup="true" aria-expanded="false">
-                                    {{user_i4['name']}}
-                            </button>
-                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item text-center" href="{{ url_for('logout') }}">Logout</a>
-                            </div>
-                        </div>
-                    </li>
-                    {% elif user_i4 == null %}
-                    <li class="font-weight-bold float-right" style="margin-right: 4vw !important;">
-                    <a href="{{ url_for('login') }}" style="text-decoration: none; color: black;">Login</a>
-                    </li>
-                    {% endif %}
-                </ul>
-            </div>
-
-            <!-- Page Main Row -->
-            <div class="row justify-content-center">
-                <!-- Avatar Column in a Row -->
-                <div class="col-lg-4">
-                    <div class="row justify-content-center">
-                        <div class="col-lg-8 text-center avatar px-0">
-                                <img src="../static/images/avatar.jpg">
-                        </div>
-                        <div class="col-lg-8 mt-4 text-center">
-                            <button class="btn btn-primary avatarbtn mb-4"> Change avatar </button>
+        <!-- Top Nav-bar -->
+        <div class="border-bottom">
+            <!-- Navbar -->
+            <ul>
+                <li>
+                    <a href="index">
+                        <img class="col-form-label" src="../static/images/weblogo-noname.png">
+                    </a>
+                </li>
+                {% if user_i4 != null %}
+                <li class="float-right dropdown-user mr-1">
+                    <div class="dropdown">
+                        <button class="btn btn-link dropdown-toggle" type="button" data-toggle="dropdown"
+                                aria-haspopup="true" aria-expanded="false">
+                                <a>Welcome, {{user_i4['name']}} !</a>
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item text-center mx-0" href="{{ url_for('logout') }}">Logout</a>
                         </div>
                     </div>
+                </li>
+                {% elif user_i4 == null %}
+                <li class="font-weight-bold float-right" style="margin-right: 4vw !important;">
+                    <a href="{{ url_for('login') }}" style="text-decoration: none; color: black;">Login</a>
+                </li>
+                {% endif %}
+            </ul>
+        </div>
+        
+        <div class="v-container">
+            <!-- Page Main Row -->
+
+            <div class="row body px-0 mx-0">
+                <div class="row col-12 col-sm-12 col-md-12 col-lg-5 col-xl-5 px-0 mx-0">
+                    <div class="col-8 justify-content-center margin-x text-center avatar px-0">
+                        {% if request.files['avatar'] != null %}
+                            <img class="profile-img" src="{{ url_for('display_image', filename=filename) }}" >
+                        {% else %}
+                            <img class="profile-img" src="http://192.168.1.11:5000/{{user_i4['avatar']}}">
+                        {% endif %}
+                    </div>          
+                    <div class="col-8 justify-content-center margin-x col-lg-8 mt-4 text-center">
+                        <form method="POST" enctype="multipart/form-data">
+                            <button class="fileupload btn btn-primary avatarbtn mb-4">
+                                <input type="file" name="avatar">
+                                Change avatar
+                            </button>
+                        </form>
+                    </div>
                 </div>
-                <!-- Form Column in a Row -->
-                <div class="col-lg-7">
-                    <!-- Page Title -->
-                    <h2 class="font-weight-bold mb-4" style="overflow: hidden">User Profile</h2>
+                <div class="col-12 col-sm-12 col-md-12 col-lg-7 col-xl-7 px-0">
+                    <h2 class="font-weight-bold my-4">User Profile</h2>
                     <form action = "{{url_for('update')}}" method ="POST">
                         <!-- Name Row -->
                         <div class="row profile mb-3">
-                            <div class="col-2 col-sm-2 col-md-2 col-lg-2 col-xl-2">
+                            <div class="col-3 col-sm-3 col-md-2 col-lg-2 col-xl-2">
                                 <label class="col-form-label font-weight-bold">Name</label>
                             </div>
                             <div class="col-9 col-sm-9 col-md-9 col-lg-9 col-xl-9">
                                 <input class="form-control" id="name" name="name" value="{{user_i4['name']}}" placeholder="Name">
-                            </div>
-                            <div class="validation">
-                                {% with messages = get_flashed_messages(with_categories=true, category_filter=["name"]) %}
-                                    {% if messages %}
-                                        {% for category, message in messages %}
-                                        <div class="alert fade show my-0 py-0 pr-0" role="alert">
-                                            <i class="fas fa-exclamation mr-2"></i>
-                                            <span class="my-0">{{message}}</span>
-                                        </div>
-                                        {% endfor %}
-                                    {% endif %}
-                                {% endwith %}
-                            </div>
+                                {% for x in err_msg %}
+                                    <p class="mt-1 ml-2 mb-0">{{x}}</p>
+                                {% endfor %}
+                            </div> 
                         </div>
                         <!-- DoB Row -->
                         <div class="row profile mb-3">
-                            <div class="col-2 col-sm-2 col-md-2 col-lg-2 col-xl-2">
+                            <div class="col-3 col-sm-3 col-md-2 col-lg-2 col-xl-2">
                                 <label class="col-form-label font-weight-bold">DoB</label>
                             </div>
                             <div class="col-9 col-sm-9 col-md-9 col-lg-9 col-xl-9">
@@ -100,7 +91,7 @@
                         </div>
                         <!-- Gender Row -->
                         <div class="row profile mb-3">
-                            <div class="col-2 col-sm-2 col-md-2 col-lg-2 col-xl-2">
+                            <div class="col-3 col-sm-3 col-md-2 col-lg-2 col-xl-2">
                                 <label class="col-form-label font-weight-bold">Gender</label>
                             </div>
                             <div class="col-9 col-sm-9 col-md-9 col-lg-9 col-xl-9">
@@ -123,11 +114,14 @@
                         </div>
                         <!-- Height Row -->
                         <div class="row profile mb-3">
-                            <div class="col-2 col-sm-2 col-md-2 col-lg-2 col-xl-2">
+                            <div class="col-3 col-sm-3 col-md-2 col-lg-2 col-xl-2">
                                 <label class="col-form-label font-weight-bold">Height</label>
                             </div>
                             <div class="col-9 col-sm-9 col-md-9 col-lg-9 col-xl-9">
                                 <input class="form-control" id="height" name="height" value="{{user_i4['height']}}" placeholder="Height (cm)">
+                                {% for y in err_height %}
+                                <p class="mt-1 ml-2 mb-0">{{y}}</p>
+                                {% endfor %}
                             </div>
                             <div class="validation">
                                 {% with messages = get_flashed_messages(with_categories=true, category_filter=["height"]) %}
@@ -144,11 +138,14 @@
                         </div>
                         <!-- Weight Row -->
                         <div class="row profile mb-3">
-                            <div class="col-2 col-sm-2 col-md-2 col-lg-2 col-xl-2">
+                            <div class="col-3 col-sm-3 col-md-2 col-lg-2 col-xl-2">
                                 <label class="col-form-label font-weight-bold">Weight</label>
                             </div>
                             <div class="col-9 col-sm-9 col-md-9 col-lg-9 col-xl-9">
                                 <input class="form-control" id="weight" name="weight" value="{{user_i4['weight']}}" placeholder="Weight (kg)">
+                                {% for z in err_weight %}
+                                <p class="mt-1 ml-2 mb-0">{{z}}</p>
+                                {% endfor %}
                             </div>
                             <div class="validation">
                                 {% with messages = get_flashed_messages(with_categories=true, category_filter=["weight"]) %}
@@ -165,7 +162,7 @@
                         </div>
                         <!-- Cholesterol Row -->
                         <div class="row profile mb-3">
-                            <div class="col-2 col-sm-2 col-md-2 col-lg-2 col-xl-2">
+                            <div class="col-3 col-sm-3 col-md-2 col-lg-2 col-xl-2">
                                 <label class="col-form-label font-weight-bold">Cholesterol</label>
                             </div>
                             <div class="col-9 col-sm-9 col-md-9 col-lg-9 col-xl-9">
@@ -185,7 +182,7 @@
                                         <option value="3" selected>Level 3</option>
                                         {% endif %}
                                     {% elif user_i4 == null %}
-                                    <option value="" disabled selected hidden>Choose level</option>-->
+                                    <option value="" disabled selected hidden>Choose level</option>
                                     <option value="1">Normal</option>
                                     <option value="2">Level 2</option>
                                     <option value="3">Level 3</option>
@@ -195,7 +192,7 @@
                         </div>
                         <!-- Glucose Row -->
                         <div class="row profile mb-3">
-                            <div class="col-2 col-sm-2 col-md-2 col-lg-2 col-xl-2">
+                            <div class="col-3 col-sm-3 col-md-2 col-lg-2 col-xl-2">
                                 <label class="col-form-label font-weight-bold">Glucose</label>
                             </div>
                             <div class="col-9 col-sm-9 col-md-9 col-lg-9 col-xl-9">
@@ -225,7 +222,7 @@
                         </div>
                         <!-- Alcohol Row -->
                         <div class="row profile mb-3">
-                            <div class="col-2 col-sm-2 col-md-2 col-lg-2 col-xl-2">
+                            <div class="col-3 col-sm-3 col-md-2 col-lg-2 col-xl-2">
                                 <label class="col-form-label font-weight-bold">Alcohol</label>
                             </div>
                             <div class="col-9 col-sm-9 col-md-9 col-lg-9 col-xl-9">
@@ -248,7 +245,7 @@
                         </div>
                         <!-- Smoke Row -->
                         <div class="row profile mb-3">
-                            <div class="col-2 col-sm-2 col-md-2 col-lg-2 col-xl-2">
+                            <div class="col-3 col-sm-3 col-md-2 col-lg-2 col-xl-2">
                                 <label class="col-form-label font-weight-bold">Smoke</label>
                             </div>
                             <div class="col-9 col-sm-9 col-md-9 col-lg-9 col-xl-9">
@@ -271,7 +268,7 @@
                         </div>
                         <!-- Active Row -->
                         <div class="row profile mb-3">
-                            <div class="col-2 col-sm-2 col-md-2 col-lg-2 col-xl-2">
+                            <div class="col-3 col-sm-3 col-md-2 col-lg-2 col-xl-2">
                                 <label class="col-form-label font-weight-bold">Active</label>
                             </div>
                             <div class="col-9 col-sm-9 col-md-9 col-lg-9 col-xl-9">
@@ -293,21 +290,24 @@
                             </div>
                         </div>
                         <!-- Buttons -->
-                        <div  class="row">
+                        <div  class="row profile text-center">
                             <div class="col-7 col-sm-7 col-md-7 col-lg-9 col-xl-9">
                                 <a style="color: white">Space</a>
                             </div>
                             <div class="col-5 col-sm-5 col-md-5 col-lg-3 col-xl-3 ">
-                                <button class="btn btn-primary custombtnwidth mr-4" type="submit"> Confirm </button>
+                                <button class="btn btn-primary custombtnwidth" type="submit"> Confirm </button>
                             </div>
                         </div>
+                    
                     </form>
                 </div>
-            </div>
+            </div>            
+
         </div>
     </body>
+    <!-- Footer -->
     <footer>
-        <div class="row justify-content-center my-4">
+        <div class="row justify-content-center py-4" style="width: 99vw;">
             <div class="col-4 col-sm-4 col-md-3 col-lg-3 col-xl-3">
                 <h4>About</h4>
                 <p>We provide users with a diagnostic system for potentially dangerous cardiovascular events.
@@ -326,12 +326,6 @@
             </div>
         </div>
     </footer>
-
-    <!-- <script>
-        function myFunction() {
-          document.getElementById("i4Form").reset();
-        }
-    </script> -->
 
 </html>
 

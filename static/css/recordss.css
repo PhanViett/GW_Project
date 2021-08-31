@@ -1,0 +1,177 @@
+* {
+    font-family: 'Arial', sans-serif;
+}
+
+.v-container {
+    min-height: 50vw;
+}
+
+.margin-x {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.margin-y {
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+
+/* Ul, Li CSS */
+ul {
+    padding: 0;
+    display: block;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+li {
+    display: inline-block;
+    vertical-align: middle;
+    line-height: 4vw;
+}
+
+li img {
+    width: 3vw;
+    min-width: 30px;
+}
+
+li a {
+    margin-left: 20px;
+}
+
+li div a {
+    color: black !important;
+    text-decoration: none;
+} 
+
+
+/* Dropdown CSS */
+.dropdown-toggle::after {   
+    color: black;
+}
+
+.dropdown-menu {
+    left: -12px !important
+}
+
+.dropdown-item {
+    line-height: 1;
+}
+
+.btn.focus, .btn:focus {
+    box-shadow:  0 0 0 0 #fff;
+}
+/* End Dropdown */
+
+
+/* End Ul, Li */
+
+
+/* Records List */
+.record-section {
+    border-radius: 10px;
+    margin: 1.5rem 1rem 1.5rem 1rem;
+    box-shadow: 1px 2px 15px #888888;
+}
+
+
+
+
+
+
+.g-status {
+    background-color: #dffaf1;
+    border-radius: 25px;
+}
+
+.b-status {
+    background-color: #Fcd1d1;
+    border-radius: 25px;
+}
+
+
+
+
+
+
+
+ul .navi {
+    margin-left: 3vw
+}
+
+.navi a {
+    font-weight: 600;
+    font-family: 'Open Sans', sans-serif;
+}
+
+
+
+
+
+
+.no-record {
+    margin-top: 5vw;
+    margin-bottom: 4vw;
+    width: 20vw;
+}
+
+
+
+/* Footer CSS */
+footer {
+    margin-top: 5vh;
+    color: #ffffff;
+    background-color: #000000;
+}
+
+h4 {
+    line-height: normal ;
+}
+/* End Footer */
+
+
+@media screen and (max-width: 768px) {
+    
+    .v-container {
+        min-height: 98vw;
+    }
+
+    li {
+        line-height: 10vw;
+    }
+
+    li, .dropdown button, .records p, .records a {
+        font-size: 0.6rem !important;
+    }
+
+    button p {
+        font-size: 0.6rem;
+    }
+
+    footer div {
+        margin-left: auto !important;
+        margin-right: auto !important;
+        text-align: justify !important;
+    }
+
+    footer h4 {
+        font-size: 0.8rem;
+        font-weight: bold;
+    }
+
+    footer p {
+        font-size: 0.6rem;
+    }
+
+
+    .record-section div span {
+        font-size: .6rem;
+    }
+    
+
+
+    ul .navi {
+        margin-left: 2vw
+    }
+}

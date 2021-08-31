@@ -1,7 +1,13 @@
+import re
 from flask import Flask, render_template, request, redirect, url_for, session, jsonify, flash
 from flask_jwt_extended import JWTManager, create_access_token
+from numpy.core.fromnumeric import var
 from pymongo import MongoClient
 from datetime import *
+
+import numpy as np
+
+import base64
 
 # MONGO DATABASE CONNECTION
 # Localhost
@@ -21,18 +27,20 @@ jwt = JWTManager(app)
 app.config["JWT_SECRET_KEY"] = "this-is-secret-key"
 
 app.secret_key = "thiss-is-secret-key"
+ 
+@app.route('/', methods=['GET','POST'], endpoint="prcimg")
+def process_image():
+
+    # inputImage is the name attribute of the <input> tag in the html
+    inImg = request.files["inputImage"].
+
+    encoded = base64.b64encode(inImg)
+    mime = "image/jpg"
+    mime = mime + ";" if mime else ";"
+    input_image = "data:%sbase64,%s" % (mime, encoded)        
+
+    return render_template("demo.html", {{ "inputImage": input_image }})
 
 
-asp=[]
-asp.append("1")
-asp.append("2")
-asp.append("3")
-asp.append("4")
-asp.append("5")
-asp.append("6")
-asp.append("7")
-asp.append("8")
-asp.append("9")
-
-for x in asp:
-    print(x)
+if __name__ == '__main__':
+    app.run(debug=True)

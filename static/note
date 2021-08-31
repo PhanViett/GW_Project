@@ -1,11 +1,76 @@
-# # Enter your database connection details below
-# app.config['MYSQL_HOST'] = '127.0.0.1'
-# app.config['MYSQL_USER'] = 'root'
-# app.config['MYSQL_PASSWORD'] = '123456789Ht'
-# app.config['MYSQL_DB'] = 'hpa-database'
-#
-# # Intialize MySQL
-# mysql = MySQL(app)
+# Name Validation
+        if not re.search("^[a-zA-Z0-9\s]*$", name):
+            name_1 = "n-OK"
+            flash("Name should only contain alphanumeric characters","warning")
+        else: 
+            name_1 = "OK"        
+        if not re.search("^.{4,}$", name):
+            name_2 = "n-OK"
+            flash("Name should has at least 4 characters","warning")
+        else: 
+            name_2 = "OK"      
+        if not re.search("^.{1,50}$", name):
+            name_3 = "n-OK"
+            flash("Name should not has over 50 characters","warning")
+        else: 
+            name_3 = "OK"
+        if name_1 == "OK" and name_2 == "OK" and name_3 == "OK": 
+            form_name = "OK" 
+        else: 
+            form_name = "n-OK"
+        
+
+        # Username Validation
+        if not re.search("^[a-zA-Z0-9\s]*$", username):
+            username_1 = "n-OK"
+            flash("Username should only contain alphanumeric characters","warning")
+        else: 
+            username_1 = "OK"        
+        if not re.search("^.{4,}$", username):
+            username_2 = "n-OK"
+            flash("Username should has at least 4 characters","warning")
+        else: 
+            username_2 = "OK"      
+        if not re.search("^.{1,50}$", username):
+            username_3 = "n-OK"
+            flash("Username should not has over 50 characters","warning")
+        else: 
+            username_3 = "OK"
+        if username_1 == "OK" and username_2 == "OK" and username_3 == "OK": 
+            form_username = "OK"
+        else: 
+            form_username = "n-OK"
+
+
+        # Password Validation
+        if not re.search("^[a-zA-Z0-9\s]*$", password):
+            password_1 = "n-OK"
+            flash("Username should only contain alphanumeric characters","warning")
+        else: 
+            password_1 = "OK"        
+        if not re.search("^.{4,}$", password):
+            password_2 = "n-OK"
+            flash("Username should has at least 4 characters","warning")
+        else: 
+            password_2 = "OK"      
+        if not re.search("^.{1,50}$", password):
+            password_3 = "n-OK"
+            flash("Username should not has over 50 characters","warning")
+        else: 
+            password_3 = "OK"
+        if password_1 == "OK" and password_2 == "OK" and password_3 == "OK": 
+            form_password = "OK"
+        else: 
+            form_password = "n-OK"
+
+
+        # Email Validation
+        email_pattern = "[a-zA-Z0-9]+@[a-zA-Z]+\.(com|edu|net)"
+        if not re.match(email_pattern, email):
+            flash("Invalid Email","warning")
+            form_email = "n-OK"
+        else:
+            form_email = "OK"
 
 
 
@@ -14,43 +79,4 @@
 
 
 
-# name = request.form['name']
-# dob = request.form['dob']
-# gender = request.form['gender']
-# height = request.form['height']
-# weight = request.form['weight']
-# ap_hi = request.form['ap_hi']
-# ap_lo = request.form['ap_lo']
-# chol = request.form['chol']
-# gluc = request.form['gluc']
-# smoke = request.form['smoke']
-# alco = request.form['alco']
-# active = request.form['active']
-#
-# user_i4_update = dict(name=name, dob=dob, gender=gender, height=height,
-#                       weight=weight, ap_hi=ap_hi, ap_lo=ap_lo, chol=chol,
-#                       gluc=gluc, smoke=smoke, alco=alco, active=active)
-
-
-        # # Password Validation
-        # if not re.search("^[a-zA-Z0-9\s]*$", password):
-        #     flash("Password should only contain alphanumeric characters","warning")
-        #     # return redirect(request.url)
-        # else:
-        #     if not re.search("^.{4,}$", password):
-        #         flash("Password should has at least 4 characters","warning")
-        #         # return redirect(request.url)
-        #     else:    
-        #         if not re.search("^.{1,50}$", password):
-        #             flash("Password should not has over 50 characters","warning")
-        #             return redirect(request.url)
-
-        # email_pattern = "[a-zA-Z0-9]+@[a-zA-Z]+\.(com|edu|net)"
-
-
-        # if not re.match(email_pattern, email):
-        #     flash("Invalid Email","warning")
-        #     return redirect(request.url)
-
-
-
+            box-shadow: 0 0 9px 0 rgb(0 0 0 / 30%)  

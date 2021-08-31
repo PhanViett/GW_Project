@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>User Profile</title>
+        <link rel="stylesheet" href="../static/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <link rel="shortcut icon" href="{{url_for('static', filename='/images/teacher.png')}}">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/js/all.js" integrity="sha256-2JRzNxMJiS0aHOJjG+liqsEOuBb6++9cY4dSOyiijX4=" crossorigin="anonymous"></script>
+        <!-- Python CSS -->
+        <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='/css/news.css') }}">
+    </head>
+
+    <body>
+        <!-- Top Nav-bar -->
+        <div class="border-bottom">
+            <!-- Navbar -->
+            <ul>
+                <li>
+                    <a href="index">
+                        <img class="col-form-label" src="../static/images/weblogo-noname.png">
+                    </a>
+                </li>
+                {% if user_i4 != null %}
+                <li class="float-right dropdown-user mr-1">
+                    <div class="dropdown">
+                        <button class="btn btn-link dropdown-toggle" type="button" data-toggle="dropdown"
+                                aria-haspopup="true" aria-expanded="false">
+                                <a>Welcome, {{user_i4['name']}} !</a>
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item text-center mx-0" href="{{ url_for('logout') }}">Logout</a>
+                        </div>
+                    </div>
+                </li>
+                {% elif user_i4 == null %}
+                <li class="font-weight-bold float-right" style="margin-right: 4vw !important;">
+                    <a href="{{ url_for('login') }}" style="text-decoration: none; color: black;">Login</a>
+                </li>
+                {% endif %}
+            </ul>
+        </div>
+        <div class="v-container">
+            <div class="row margin-x justify-content-center mt-4">
+                <div class="news row justify-content-center col-12 col-sm-12 col-md-10 col-lg-10 col-xl-10">
+                    <div class="col-12 col-sm-12 col-md-10 col-lg-10 col-xl-10">
+                        <p class="headline font-weight-bold mb-4">Headlines</p>
+                    </div>
+                    {% for news, x in zip(newss, spaces) %}
+                    <div class="box row d-flex col-11 col-sm-11 col-md-10 col-lg-10 col-xl-10 border mb-2">
+                        <div class="box-left p-2 col-8 col-sm-8 col-md-9 col-lg-9 col-xl-9">
+                            <div class="title">
+                                <a href="{{news.link}}">{{news.title}}</a>
+                            </div>
+
+                            <div class="author">
+                                <p class="font-weight-bold" style="text-decoration: none;">
+                                    {{news.author}} - <span class="font-weight-normal">{{x}}</span>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="box-right ml-auto p-2 col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 text-right px-0">
+                            <img src="http://192.168.1.11:5000/{{news.file}}">
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </body>
+
+    <!-- Footer -->
+    <footer>
+        <div class="row justify-content-center py-4 mx-0">
+            <div class="col-4 col-sm-4 col-md-3 col-lg-3 col-xl-3">
+                <h4>About</h4>
+                <p>We provide users with a diagnostic system for potentially dangerous cardiovascular events.
+                    The system works on the user's information in the profile that the user has updated on the website.</p>
+                <p class="mb-1">@Copyright Application 2021.</p>
+                <p class="mb-1">All Right Reserved.</p>
+            </div>
+            <div class="col-4 col-sm-4 col-md-3 col-lg-3 col-xl-3">
+                <h4>Contacts</h4>
+                <p class="mb-1">Phan Van Viet</p>
+                <p class="mb-1">Tel: 03833343354</p>
+                <p class="mb-1">Email: vietpvgcs18614@fpt.edu.vn</p>
+            </div>
+            <div class="col-4 col-sm-4 col-md-3 col-lg-3 col-xl-3">
+                <h4>Recently Posts</h4>
+            </div>
+        </div>
+    </footer>
+</html>

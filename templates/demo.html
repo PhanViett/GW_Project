@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>User Profile</title>
+        <link rel="stylesheet" href="../static/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <link rel="shortcut icon" href="{{url_for('static', filename='/images/teacher.png')}}">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/js/all.js" integrity="sha256-2JRzNxMJiS0aHOJjG+liqsEOuBb6++9cY4dSOyiijX4=" crossorigin="anonymous"></script>
+        <!-- Normal CSS -->
+        <link rel= "stylesheet" type= "text/css" href= "../static/css/profile.css">
+        <!-- Python CSS -->
+        <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='/css/ad_news.css') }}">
+    </head>
+
+    <body>
+        <form action="{{url_for('prcimg')}}" method="POST" enctype="multipart/form-data">
+            <input src = '{{ input_image }}' name = 'inputImage' type="file">
+            <button type="submit"> Confirm </button>
+        </form>     
+
+    </body>
+
+</html>

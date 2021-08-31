@@ -9,121 +9,115 @@
             <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
             <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
             <link rel="shortcut icon" href="{{url_for('static', filename='/images/teacher.png')}}">
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/js/all.js" integrity="sha256-2JRzNxMJiS0aHOJjG+liqsEOuBb6++9cY4dSOyiijX4=" crossorigin="anonymous"></script>
             <link rel= "stylesheet" type= "text/css" href="{{ url_for('static',filename='/css/font-awesome/css/font-awesome.min.css') }}">
-            <!-- Normal CSS -->
-            <link rel= "stylesheet" type= "text/css" href= "../static/css/index.css">
             <!-- Python CSS -->
-            <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='/css/record.css') }}">
+            <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='/css/recordss.css') }}">
     </head>
     <body>
+        <!-- Top Nav-bar -->
+        <div class="border-bottom">
+            <!-- Navbar -->
+            <ul>
+                <li>
+                    <a href="index">
+                        <img class="col-form-label" src="../static/images/weblogo-noname.png">
+                    </a>
+                </li>
+                {% if user_i4 != null %}
+                <li class="float-right dropdown-user mr-1">
+                    <div class="dropdown">
+                        <button class="btn btn-link dropdown-toggle" type="button" data-toggle="dropdown"
+                                aria-haspopup="true" aria-expanded="false">
+                                <a>Welcome, {{user_i4['name']}} !</a>
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item text-center mx-0" href="{{ url_for('logout') }}">Logout</a>
+                        </div>
+                    </div>
+                </li>
+                {% elif user_i4 == null %}
+                <li class="font-weight-bold float-right" style="margin-right: 4vw !important;">
+                    <a href="{{ url_for('login') }}" style="text-decoration: none; color: black;">Login</a>
+                </li>
+                {% endif %}
+            </ul>
+        </div>
         <div class="v-container">
-            <!-- Top Nav-bar -->
-            <div class="container border-bottom mb-4 px-0" style="min-width: 100vw; margin: 0;">
-                <!-- Navbar -->
-
-                <ul style="margin: 0;">
-                    <li>
-                        <a href="index">
-                            <img class="col-form-label" src="../static/images/weblogo-noname.png">
-                        </a>
-                    </li>
-                    {% if user_i4 != null %}
-                    <li class="float-right" style="display: inline-block">
-                        <div class="dropdown" style="overflow-x: visible !important; overflow-y: visible !important">
-                            <button class="btn btn-link dropdown-toggle" type="button" data-toggle="dropdown"
-                                    aria-haspopup="true" aria-expanded="false">
-                                    Welcome, {{user_i4['name']}} !
-                            </button>
-                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item text-center" href="{{ url_for('logout') }}">Logout</a>
+            <div class="row justify-content-center mx-0">
+                {% if datas|length >= 1 %}
+                    <div class="margin-x col-10 col-sm-10 col-md-10 col-lg-10 col-xl-10" style="padding: .7rem !important;"> 
+                        <p class="col-form-label font-weight-bold" style="font-size: 1.5em;">Measure History</p>
+                    </div>
+                    {% for data in datas %}
+                        <div class="record-section row col-11 col-sm-11 col-md-11 col-lg-5 col-xl-5 border px-3 py-3">
+                            <!-- Date -->
+                            <div class="font-weight-bold col-2 col-sm-2 col-md-2 col-lg-2 col-xl-2 px-2 py-2">
+                                <span>Date :</span>
+                            </div>
+                            <div class="col-3 col-sm-3 col-md-3 col-lg-4 col-xl-4 px-1 py-2">
+                                <span>{{data.date}}</span>
+                            </div>
+                            <!-- Status -->
+                            <div class="font-weight-bold col-2 col-sm-2 col-md-2 col-lg-2 col-xl-2 px-2 py-2">
+                                <span>Status :</span>
+                            </div>
+                            {% if data.cardio == "0" %}
+                            <div class="g-status col-form-label text-center col-4 col-sm-4 col-md-4 col-lg-3 col-xl-3">
+                                <span class="col-form-label" style="color: #5aceae;">Good</span>
+                            </div>
+                            {% elif data.cardio == "1" %}
+                            <div class="b-status col-form-label text-center col-4 col-sm-4 col-md-4 col-lg-3 col-xl-3">
+                                <span class="col-form-label" style="color: #F97878;">Bad</span>
+                            </div>
+                            {% endif %}
+                            <!-- Height -->
+                            <div class="font-weight-bold col-2 col-sm-2 col-md-2 col-lg-2 col-xl-2 px-2 py-2">
+                                <span>Height :</span>
+                            </div>
+                            <div class="col-3 col-sm-3 col-md-3 col-lg-4 col-xl-4 px-1 py-2">
+                                <span>{{data.height}} cm</span>
+                            </div>
+                            <!-- Weight -->
+                            <div class="font-weight-bold col-3 col-sm-3 col-md-3 col-lg-2 col-xl-2 px-2 py-2">
+                                <span>Weight :</span>
+                            </div>
+                            <div class="col-3 col-sm-3 col-md-3 col-lg-4 col-xl-4 px-1 py-2">
+                                <span>{{data.weight}} kg</span>
+                            </div>
+                            <!-- Systolic Pressure -->
+                            <div class="font-weight-bold col-4 col-sm-4 col-md-4 col-lg-4 col-xl-4 px-2 py-2">
+                                <span>Systolic Pressure :</span>
+                            </div>
+                            <div class="col-2 col-sm-2 col-md-2 col-lg-2 col-xl-2 pl-1 pr-0 py-2">
+                                <span>{{data.ap_lo}} mmHg</span>
+                            </div>
+                            <!-- Diastolic Pressure -->
+                            <div class="font-weight-bold col-4 col-sm-4 col-md-4 col-lg-4 col-xl-4 px-2 py-2">
+                                <span>Diastolic Pressure :</span>
+                            </div>
+                            <div class="col-2 col-sm-2 col-md-2 col-lg-2 col-xl-2 pl-0 pr-1 py-2">
+                                <span>{{data.ap_hi}} mmHg</span>
                             </div>
                         </div>
-                    </li>
-                    {% elif user_i4 == null %}
-                    <li class="font-weight-bold float-right" style="margin-right: 4vw !important;">
-                        <a href="{{ url_for('login') }}" style="text-decoration: none; color: black;">Login</a>
-                    </li>
-                    {% endif %}
-                </ul>
+                    {% endfor %}
+                {% else %}
+                <div class=" row col-10 col-sm-10 col-md-10 col-lg-10 col-xl-10 text-center"> 
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                        <img class="no-record" src="../static/images/blank-records(color).png" style="color: #ccd1d8;">
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12" style="color: #ccd1d8;">
+                        Người dùng vẫn chưa có số liệu nào dược ghi lại 
+                    </div>
+                </div>
+                {% endif %}
             </div>
-
-            {% if datas !=null %}
-                {% for data in datas %}
-                <div class="row">
-                    <div class="col-10 col-sm-10 col-md-10 col-lg-10 col-xl-10 row border records mb-4"> 
-                        <div class="col-10 col-sm-10 col-md-10 col-lg-10 col-xl-10">
-                            <div class="row">
-                                <div class="col-2 col-sm-2 col-md-2 col-lg-1 col-xl-1 px-0 ml-3">
-                                    <a>Date:</a>
-                                </div>
-                                <div class="col-3 col-sm-3 col-md-3 col-lg-1 col-xl-1 px-0">
-                                    <a>{{ data.date }}</a>
-                                </div>
-                                <div class="col-2 col-sm-2 col-md-2 col-lg-1 col-xl-1 px-0 ml-3">
-                                    <a>Status:</a>
-                                </div>
-                                <div class="col-3 col-sm-3 col-md-3 col-lg-1 col-xl-1 px-0">
-                                    {% if data.cardio == "0" %}
-                                        <a class="text-danger">Bad</a>
-                                    {% elif data.cardio == 1 %}
-                                        <p class="text-success">Good</p>
-                                    {% endif %}
-                                </div>
-                            </div>
-    
-                            <div class="row">
-    
-                                <div class="col-2 col-sm-2 col-md-2 col-lg-1 col-xl-1 ml-3 px-0">
-                                    <a>Height:</a>
-                                </div>
-                                <div class="col-3 col-sm-3 col-md-3 col-lg-1 col-xl-1 px-0">
-                                    <a>{{ data.height }} (cm)</a>
-                                </div>
-    
-                                <div class="col-2 col-sm-2 col-md-2 col-lg-1 col-xl-1 ml-3 px-0">
-                                    <a>Weight:</a>
-                                </div>
-                                <div class="col-3 col-sm-3 col-md-3 col-lg-1 col-xl-1 px-0">
-                                    <a>{{ data.weight }} (kg)</a>
-                                </div>
-    
-                                <div class="col-3 col-sm-3 col-md-3 col-lg-2 col-xl-2 ml-3 px-0">
-                                    <a>High Pressure:</a>
-                                </div>
-                                <div class="col-2 col-sm-2 col-md-2 col-lg-1 col-xl-1 px-0">
-                                    <a>{{ data.ap_hi }} (cm)</a>
-                                </div>
-    
-                                <div class="col-3 col-sm-3 col-md-3 col-lg-2 col-xl-2 ml-3 px-0">
-                                    <a>Low Pressure:</a>
-                                </div>
-                                <div class="col-2 col-sm-2 col-md-2 col-lg-1 col-xl-1 px-0">
-                                    <a>{{ data.ap_lo }} (kg)</a>
-                                </div>
-    
-                            </div>
-                        </div>
-
-                        
-                        <div class="col-1 col-sm-1 col-md-1 col-lg-1 col-xl-1 float-right">
-                            <i class="fa fa-angle-right" aria-hidden="true"></i>
-                        </div>
-                    </div>
-
-                </div>
-                {% endfor %}
-            {% elif datas == null %}
-                <div class="row">
-                    <div class="col-10 col-sm-10 col-md-10 col-lg-10 col-xl-10 border mb-3"> 
-                        <p>Bạn vẫn chưa có lịch sử đo trong hệ thống</p>
-                    </div>
-                </div>
-            {% endif %}
-
         </div>
     </body>
+
+    <!-- Footer -->
     <footer>
-        <div class="row justify-content-center my-4">
+        <div class="row justify-content-center py-4 mx-0">
             <div class="col-4 col-sm-4 col-md-3 col-lg-3 col-xl-3">
                 <h4>About</h4>
                 <p>We provide users with a diagnostic system for potentially dangerous cardiovascular events.
@@ -142,4 +136,5 @@
             </div>
         </div>
     </footer>
+    
 </html>

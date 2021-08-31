@@ -3,6 +3,7 @@
 	<head>
 		<meta charset="utf-8">
 		<title>Login</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 		<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
         <link rel="stylesheet" href="../static/bootstrap.min.css">
@@ -12,8 +13,8 @@
         <link rel="shortcut icon" href="{{url_for('static', filename='images/teacher.png')}}">
 	</head>
 	<body>
-		<div class="row justify-content-end mx-0 px-0">
-			<div class="login col-4 col-sm-4 col-md-4 col-lg-4 col-xl-4 px-0">
+		<div class="d-flex justify-content-center">
+			<div class="login">
 				<h1>Login</h1>
 				<div class="links">
 					<a href="{{ url_for('login') }}" class="active">Login</a>
@@ -21,19 +22,33 @@
 				</div>
 	
 				<form action="{{ url_for('login') }}" method="POST" autocomplete="off">
-					<label for="username">
-						<i class="fas fa-user"></i>
-					</label>
-					<input type="text" name="username" placeholder="Username" id="username" required>
-					<label for="password">
-						<i class="fas fa-lock"></i>
-					</label>
-					<input type="password" name="password" placeholder="Password" id="password" required>
+                    <div class="d-flex justify-content-center">
+						<label for="username">
+							<i class="fas fa-user"></i>
+						</label>
+						<input type="text" name="username" placeholder="Username" id="username" required>
+					</div>
+					<div class="err_msg">
+						{% if err_username %}
+						<p>{{err_username[0]}}</p>
+						{% endif %}
+					</div>
+                    <div class="d-flex justify-content-center">
+						<label for="password">
+							<i class="fas fa-lock"></i>
+						</label>
+						<input type="password" name="password" placeholder="Password" id="password" required>
+					</div>
+					<div class="err_msg">
+						{% if err %}
+						<p>{{err[0]}}</p>
+						{% endif %}
+					</div>
 					<div class="msg">{{ msg }}</div>
 					<input type="submit" value="Login">
 				</form>
 			</div>
-			<div class="col-4 col-sm-4 col-md-4 col-lg-4 col-xl-4 mt-3">
+			<!-- <div class="col-4 col-sm-4 col-md-4 col-lg-4 col-xl-4 mt-3">
                 {% with messages = get_flashed_messages(with_categories=true) %}
                     {% if messages %}
                         {% for category, message in messages %}
@@ -47,8 +62,7 @@
                         {% endfor %}
                     {% endif %}
                 {% endwith %}
-            </div>
+            </div> -->
 		</div>
-		
 	</body>
 </html>

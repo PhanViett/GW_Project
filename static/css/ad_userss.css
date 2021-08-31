@@ -18,9 +18,10 @@
     margin-bottom: auto;
 }
 
-/* .row {
-    width: 99vw;
-} */
+.row {
+    margin-left: 0;
+    margin-right: 0;
+}
 
 /* Ul, Li CSS */
 ul {
@@ -121,11 +122,6 @@ h4 {
     margin-bottom: 0 !important;
 }
 
-.uploadinput input {
-    border: none;
-    border-color: #fff;
-}
-
 
 @media screen and (max-width: 768px) {
 
@@ -212,8 +208,6 @@ h4 {
     }
 
 
-
-
     footer div {
         margin-left: auto !important;
         margin-right: auto !important;
@@ -234,6 +228,15 @@ h4 {
 
 
 
+    .email {
+        display: none;
+    }
+
+
+
+
+
+ 
 
 
 }
