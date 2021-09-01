@@ -12,15 +12,15 @@ app = Flask(__name__)
 
 # MONGO DATABASE CONNECTION
 # Localhost
-client = MongoClient("mongodb://localhost:27017/")
+client = MongoClient("cluster-shard-00-01.2hp1c.mongodb.net:27017/")
 # Database Name
-db = client["project"]
+db = client["HPA-SYSTEM"]
 # Collection Name
-user = db["user"]
+user = db["users"]
 # Collection Name
 news = db["news"]
 
-app.config['MONGO_URI'] = 'mongodb://localhost:27017/project'
+app.config['MONGO_URI'] = 'cluster-shard-00-01.2hp1c.mongodb.net:27017/HPA-SYSTEM'
 
 jwt = JWTManager(app)
 
@@ -36,8 +36,6 @@ model = pickle.load(open('model.pkl', 'rb'))
 app.jinja_env.globals.update(zip=zip)
 
 AVATAR_ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
-
-localip = '192.168.1.11'
 
 @app.route('/')
 def default():
@@ -727,8 +725,7 @@ def demo():
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    # app.run(debug=True, host="192.168.1.10")
-    app.run(debug=True, host=localip)
+    app.run(debug=True)
 
 
 
