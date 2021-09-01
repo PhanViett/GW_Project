@@ -12,7 +12,7 @@ app = Flask(__name__)
 
 # MONGO DATABASE CONNECTION
 # Localhost
-client = MongoClient("cluster-shard-00-01.2hp1c.mongodb.net:27017/")
+client = MongoClient("mongodb://cluster-shard-00-01.2hp1c.mongodb.net:27017/")
 # Database Name
 db = client["HPA-SYSTEM"]
 # Collection Name
@@ -20,7 +20,7 @@ user = db["users"]
 # Collection Name
 news = db["news"]
 
-app.config['MONGO_URI'] = 'cluster-shard-00-01.2hp1c.mongodb.net:27017/HPA-SYSTEM'
+app.config['MONGO_URI'] = 'mongodb://cluster-shard-00-01.2hp1c.mongodb.net:27017/HPA-SYSTEM'
 
 jwt = JWTManager(app)
 
